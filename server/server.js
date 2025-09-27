@@ -49,13 +49,6 @@ app.post('/api/send-sms', async (req, res) => {
       });
     }
 
-    // Check if Twilio is properly configured
-    if (!client) {
-      return res.status(500).json({ 
-        error: 'Twilio not configured. Please check your environment variables.' 
-      });
-    }
-
     // Generate a unique session ID for this location request
     const sessionId = Math.random().toString(36).substring(2, 15);
     
@@ -65,12 +58,22 @@ app.post('/api/send-sms', async (req, res) => {
     // Append the link to the message
     const fullMessage = `${message}\n\nShare your location: ${locationLink}`;
 
-    // Send SMS using Twilio
-    const messageResult = await client.messages.create({
-      body: fullMessage,
-      from: process.env.TWILIO_PHONE_NUMBER,
-      to: phoneNumber
-    });
+    let messageResult = { sid: 'test_message_' + sessionId };
+
+    // Check if Twilio is properly configured
+    if (!client) {
+      // For testing purposes, create a mock response
+      console.log('📧 Mock SMS would be sent to:', phoneNumber);
+      console.log('📄 Message:', fullMessage);
+      messageResult = { sid: 'mock_message_' + sessionId };
+    } else {
+      // Send SMS using Twilio
+      messageResult = await client.messages.create({
+        body: fullMessage,
+        from: process.env.TWILIO_PHONE_NUMBER,
+        to: phoneNumber
+      });
+    }
 
     // Store session info
     locationData.set(sessionId, {

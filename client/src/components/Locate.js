@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Locate = () => {
   const { sessionId } = useParams();
-  const [loading, setLoading] = useState(false);
   const [locationShared, setLocationShared] = useState(false);
   const [error, setError] = useState(null);
   const [sessionInfo, setSessionInfo] = useState(null);
   const [locationStatus, setLocationStatus] = useState('idle'); // idle, requesting, success, error
 
-  useEffect(() => {
-    // Fetch session information when component mounts
-    fetchSessionInfo();
-  }, [sessionId]);
-
-  const fetchSessionInfo = async () => {
+  const fetchSessionInfo = useCallback(async () => {
     try {
       const response = await axios.get(`/api/location/${sessionId}`);
       setSessionInfo(response.data);
@@ -32,7 +26,12 @@ const Locate = () => {
         setError('Failed to load session information');
       }
     }
-  };
+  }, [sessionId]);
+
+  useEffect(() => {
+    // Fetch session information when component mounts
+    fetchSessionInfo();
+  }, [fetchSessionInfo]);
 
   const requestLocation = () => {
     setLocationStatus('requesting');
