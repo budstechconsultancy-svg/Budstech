@@ -1,0 +1,48 @@
+{
+  "name": "Budstech SMS Location App",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode.vscode-json",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-eslint",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense",
+        "ms-vscode.vscode-react-javascript-snippets"
+      ]
+    }
+  },
+
+  "forwardPorts": [3000, 3001],
+  "portsAttributes": {
+    "3000": {
+      "label": "React Client",
+      "onAutoForward": "notify"
+    },
+    "3001": {
+      "label": "Express Server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "postCreateCommand": "cd /workspaces/Budstech && npm install --prefix server && npm install --prefix client",
+  
+  "postStartCommand": {
+    "server": "cd /workspaces/Budstech/server && npm run dev",
+    "client": "cd /workspaces/Budstech/client && npm start"
+  },
+
+  "remoteUser": "node"
+}
