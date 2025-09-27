@@ -1,0 +1,41 @@
+{
+  "name": "budstech-sms-location-sharing",
+  "version": "1.0.0",
+  "description": "SMS Location Sharing App with comprehensive testing framework",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:integration": "jest --testMatch='**/integration/**/*.test.js'",
+    "test:unit": "jest --testMatch='**/unit/**/*.test.js'",
+    "lint": "eslint src/ tests/",
+    "lint:fix": "eslint src/ tests/ --fix"
+  },
+  "dependencies": {
+    "twilio": "^4.18.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "joi": "^17.11.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "eslint": "^8.52.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1"
+  },
+  "keywords": [
+    "sms",
+    "location",
+    "sharing",
+    "testing",
+    "twilio"
+  ],
+  "author": "Budstech",
+  "license": "MIT"
+}
