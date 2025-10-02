@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TutorAI-Voice - Your AI Tutor</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- Login Page -->
+  <div id="login-page" class="page active">
+    <div class="container">
+      <div class="login-box">
+        <h1>TutorAI-Voice</h1>
+        <p class="subtitle">Your Empathetic AI Tutor</p>
+        
+        <div id="login-form-container">
+          <h2>Login</h2>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" required>
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <p class="toggle-form">Don't have an account? <a href="#" id="show-register">Register</a></p>
+        </div>
+
+        <div id="register-form-container" style="display: none;">
+          <h2>Register</h2>
+          <form id="register-form">
+            <div class="form-group">
+              <label for="register-name">Name</label>
+              <input type="text" id="register-name" required>
+            </div>
+            <div class="form-group">
+              <label for="register-email">Email</label>
+              <input type="email" id="register-email" required>
+            </div>
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <input type="password" id="register-password" required>
+            </div>
+            <div class="form-group">
+              <label for="register-grade">Grade Level</label>
+              <select id="register-grade">
+                <option value="grade5">Grade 5</option>
+                <option value="grade12" selected>Grade 12</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+          <p class="toggle-form">Already have an account? <a href="#" id="show-login">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application -->
+  <div id="app-page" class="page">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <h1>TutorAI-Voice</h1>
+        <span id="user-name"></span>
+      </div>
+      <nav class="header-nav">
+        <button class="nav-btn" data-view="chat">Chat</button>
+        <button class="nav-btn" data-view="whiteboard">Whiteboard</button>
+        <button class="nav-btn" data-view="code">Code Mode</button>
+        <button class="nav-btn" data-view="settings">Settings</button>
+        <button class="nav-btn" data-view="documents">Documents</button>
+        <button class="nav-btn" data-view="bookmarks">Bookmarks</button>
+        <button id="logout-btn" class="btn btn-secondary">Logout</button>
+      </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <!-- Chat View -->
+      <div id="chat-view" class="view active">
+        <div class="chat-container">
+          <div id="transcript-display" class="transcript-display">
+            <p class="welcome-message">Hello! Which topic shall we explore today?</p>
+          </div>
+          <div class="audio-controls">
+            <button id="mic-btn" class="btn btn-large btn-primary">
+              <span class="mic-icon">🎤</span> Start Speaking
+            </button>
+            <div id="recording-indicator" class="recording-indicator" style="display: none;">
+              <span class="pulse"></span> Recording...
+            </div>
+          </div>
+          <div class="quick-commands">
+            <h3>Quick Commands:</h3>
+            <button class="cmd-btn" data-command="Show whiteboard">Show Whiteboard</button>
+            <button class="cmd-btn" data-command="Switch to code mode">Code Mode</button>
+            <button class="cmd-btn" data-command="Bookmark this">Bookmark</button>
+            <button class="cmd-btn" data-command="Simplify explanation">Simplify</button>
+            <button class="cmd-btn" data-command="Go deeper">Go Deeper</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Whiteboard View -->
+      <div id="whiteboard-view" class="view">
+        <div class="whiteboard-container">
+          <canvas id="whiteboard-canvas"></canvas>
+          <div id="whiteboard-transcript" class="whiteboard-transcript"></div>
+          <div class="whiteboard-controls">
+            <button id="clear-whiteboard" class="btn">Clear</button>
+            <button id="download-whiteboard" class="btn">Download PDF</button>
+            <button id="back-to-chat" class="btn btn-secondary">Back to Chat</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Mode View -->
+      <div id="code-view" class="view">
+        <div class="code-container">
+          <div class="code-explanation">
+            <h2>— Whiteboard Explanation —</h2>
+            <div id="code-whiteboard-section"></div>
+          </div>
+          <div class="code-editor">
+            <h2>— Code Screen —</h2>
+            <pre><code id="code-display"></code></pre>
+            <button id="run-code" class="btn btn-primary">Run Code</button>
+          </div>
+          <div class="code-results">
+            <h3>Results:</h3>
+            <div id="code-output"></div>
+          </div>
+          <button id="back-to-chat-from-code" class="btn btn-secondary">Back to Chat</button>
+        </div>
+      </div>
+
+      <!-- Settings View -->
+      <div id="settings-view" class="view">
+        <div class="settings-container">
+          <h2>Settings</h2>
+          <form id="settings-form">
+            <div class="form-group">
+              <label for="tts-provider">TTS Provider</label>
+              <select id="tts-provider">
+                <option value="ElevenLabs">ElevenLabs</option>
+                <option value="AWS Polly">AWS Polly</option>
+                <option value="Google TTS">Google TTS</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="speaking-rate">Speaking Rate</label>
+              <select id="speaking-rate">
+                <option value="slow">Slow</option>
+                <option value="medium" selected>Medium</option>
+                <option value="fast">Fast</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pitch">Pitch</label>
+              <select id="pitch">
+                <option value="low">Low</option>
+                <option value="normal" selected>Normal</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Documents View -->
+      <div id="documents-view" class="view">
+        <div class="documents-container">
+          <h2>My Documents</h2>
+          <div class="upload-section">
+            <input type="file" id="document-upload" accept=".pdf,.doc,.docx,.txt,.md">
+            <button id="upload-btn" class="btn btn-primary">Upload Document</button>
+          </div>
+          <div id="documents-list" class="documents-list"></div>
+        </div>
+      </div>
+
+      <!-- Bookmarks View -->
+      <div id="bookmarks-view" class="view">
+        <div class="bookmarks-container">
+          <h2>My Bookmarks</h2>
+          <div id="bookmarks-list" class="bookmarks-list"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Audio Player (hidden) -->
+  <audio id="audio-player" style="display: none;"></audio>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
