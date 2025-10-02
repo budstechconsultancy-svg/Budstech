@@ -1,0 +1,5 @@
+user: |
+  Documents: {{uploaded_doc_list}}  
+  Grade Level: {{grade5|grade12|advanced}}  
+  Mode: {{"chat"|"whiteboard"|"code"}}  
+  Request: {{student's spoken or typed question}}
