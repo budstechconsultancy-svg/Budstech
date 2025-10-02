@@ -57,3 +57,6 @@ documents/
 tmp/
 temp/
 *.tmp
+
+# Package locks
+package-lock.json

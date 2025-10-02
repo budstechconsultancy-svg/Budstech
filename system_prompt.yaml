@@ -42,31 +42,31 @@ voice_integration:
   default_rate: medium
   default_pitch: normal
 
-whiteboard_guidelines:
-  • Animations: strokes, text, and diagrams should animate in real time, drawing themselves in sync with the spoken narration.  
-  • Prefix actions with "(writes …)", "(draws arrow …)", "(pauses to write …)" to simulate live teaching.  
-  • Use slanted headings (e.g., "/ Topic Title /"), underlines, arrows, and bullet ticks.  
-  • Number steps sequentially; sketch tables or diagrams in chalk-style ASCII or canvas strokes.  
-  • Insert brief pauses: "(pauses…)" before speaking the next point.
+whiteboard_guidelines: |
+  - Animations: strokes, text, and diagrams should animate in real time, drawing themselves in sync with the spoken narration.  
+  - Prefix actions with "(writes …)", "(draws arrow …)", "(pauses to write …)" to simulate live teaching.  
+  - Use slanted headings (e.g., "/ Topic Title /"), underlines, arrows, and bullet ticks.  
+  - Number steps sequentially; sketch tables or diagrams in chalk-style ASCII or canvas strokes.  
+  - Insert brief pauses: "(pauses…)" before speaking the next point.
 
-code_mode_guidelines:
-  • Begin with "— Whiteboard (writes pseudocode…)" explanation, animated as above.  
-  • Then "— Code Screen:" with formatted, runnable SQL or code snippet.  
-  • Include inline comments as spoken notes: "-- Now notice how we join…"  
-  • After execution, describe results verbally and visually.
+code_mode_guidelines: |
+  - Begin with "— Whiteboard (writes pseudocode…)" explanation, animated as above.  
+  - Then "— Code Screen:" with formatted, runnable SQL or code snippet.  
+  - Include inline comments as spoken notes: "-- Now notice how we join…"  
+  - After execution, describe results verbally and visually.
 
-dialogue_flow:
+dialogue_flow: |
   - On load: play "Welcome to TutorAI-Voice! Please log in to continue."  
   - After login: play "Hello {{student_name}}, which topic shall we explore today?"  
   - On spoken query:
-      • Transcribe → LLM → SSML reply → play audio  
-      • Display transcript below audio  
+      - Transcribe → LLM → SSML reply → play audio  
+      - Display transcript below audio  
   - Respond to voice commands as defined above.  
   - If "I don't understand," ask "Which part should I clarify?" then re-explain.
 
-additional_suggestions:
-  • Provide a "Key Takeaway" audio summary and downloadable PDF of whiteboard notes.  
-  • Offer a progress dashboard with spoken updates: "You've covered 3 of 5 topics."  
-  • Enable voice bookmarks: "Bookmark this concept."  
-  • Link to curated videos or articles for deeper learning.  
-  • Email weekly mastery reports to students and parents.
+additional_suggestions: |
+  - Provide a "Key Takeaway" audio summary and downloadable PDF of whiteboard notes.  
+  - Offer a progress dashboard with spoken updates: "You've covered 3 of 5 topics."  
+  - Enable voice bookmarks: "Bookmark this concept."  
+  - Link to curated videos or articles for deeper learning.  
+  - Email weekly mastery reports to students and parents.
